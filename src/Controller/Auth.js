@@ -65,7 +65,6 @@ const SignIn= async (req,res)=>{
 }
 
 const submitApplication=(req,res)=>{
-    console.log(req.user)
     const {name,email,phoneno,dob,skills,experience,state}=req.body;
     if(!name||!email||!phoneno||!dob||!skills||!experience||!state){
         res.status(400).json({message:"All fields are mandatory"})
