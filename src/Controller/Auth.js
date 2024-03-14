@@ -37,23 +37,13 @@ const SignIn= async (req,res)=>{
           email: req.body.email
         });
         if(!emailcheck){
-          res.status(404).send("User not found").then((result)=>{
-              console.log("result",result)
-          }).catch((err)=>{
-              console.log("err",err)
-          })
+          res.status(404).send("User not found")
         }
        if(emailcheck && req.body.password == emailcheck.password){
               token = await tokenGenrate(emailcheck._id).then((result)=>{
                   res.send(result)
               })
               .catch((err)=>{
-                  console.log("err",err)
-              })
-
-              res.send("Login Successful").then((result)=>{
-                  console.log("error",result)
-              }).catch((err)=>{
                   console.log("err",err)
               })
           }
@@ -70,9 +60,9 @@ const submitApplication=(req,res)=>{
         res.status(400).json({message:"All fields are mandatory"})
     }
     else{
-        const ApplicationDetails=ApplicationModel(req.body)
-       
-        ApplicationDetails.save().then((result)=>{
+        const data=req.body
+
+        ApplicationModel.findOneAndUpdate(req.user._id,data).then((result)=>{
              console.log("sumitted",result)
             res.status(200).json({message:"Application submitted successfully"})
 
