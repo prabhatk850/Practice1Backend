@@ -54,6 +54,15 @@ const SignIn= async (req,res)=>{
 }
 }
 
+const viewApplication=(req,res)=>{
+    ApplicationModel.findById(req.user._id).then((result)=>{
+        
+        res.send(result)
+    }).catch((error)=>{
+        console.log("error",error)
+    })
+} 
+
 const submitApplication=(req,res)=>{
     const {phoneno,dob,experience,city,state}=req.body;
     if(!phoneno||!dob||!experience||!state||!city){
@@ -73,5 +82,5 @@ const submitApplication=(req,res)=>{
 
 
 
-module.exports={SignUp,SignIn,submitApplication}
+module.exports={SignUp,SignIn,submitApplication,viewApplication}
 
