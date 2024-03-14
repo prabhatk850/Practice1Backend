@@ -2,8 +2,8 @@ const mongoose=require('mongoose');
 const applicationSchema=new mongoose.Schema({
 
     name:{
-    type:String,
-    require:true
+        type:String,
+        require:true
     },
     email:{
         type:String,
@@ -26,7 +26,10 @@ const applicationSchema=new mongoose.Schema({
         type:String
     },
     state:{
-        typpe:String  
+        type:String  
+    },
+    city:{
+        type:String
     },
     readytolocate:{
         type:Boolean

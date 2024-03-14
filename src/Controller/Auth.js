@@ -51,11 +51,11 @@ const SignIn= async (req,res)=>{
                   console.log("err",err)
               })
 
-              // res.send("Login Successful").then((result)=>{
-              //     console.log("error",result)
-              // }).catch((err)=>{
-              //     console.log("err",err)
-              // })
+              res.send("Login Successful").then((result)=>{
+                  console.log("error",result)
+              }).catch((err)=>{
+                  console.log("err",err)
+              })
           }
           else{
               res.send("Invalid password")
@@ -65,15 +65,17 @@ const SignIn= async (req,res)=>{
 }
 
 const submitApplication=(req,res)=>{
-    const {name,email,phoneno,dob,skills,experience,state}=req.body;
-    if(!name||!email||!phoneno||!dob||!skills||!experience||!state){
+    const {phoneno,dob,experience,city,state}=req.body;
+    if(!phoneno||!dob||!experience||!state||!city){
         res.status(400).json({message:"All fields are mandatory"})
     }
     else{
         const ApplicationDetails=ApplicationModel(req.body)
        
         ApplicationDetails.save().then((result)=>{
+             console.log("sumitted",result)
             res.status(200).json({message:"Application submitted successfully"})
+
         }).catch((err)=>{
             res.status(400).json({message:"Error in submitting application",err})
         })}
