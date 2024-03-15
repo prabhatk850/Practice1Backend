@@ -1,11 +1,10 @@
 const ApplicationModel=require('../Database/authschema')
 const jwt =require("jsonwebtoken");
-require("dotenv").config();
-const {isAdmin}=require('../MiddleWare/middleware')
+require("dotenv").config()
 const authschema = require("../Database/authschema");
 
 tokenGenrate=async(_id)=>{
-    const token=await jwt.sign({_id},process.env.JWTSECRETKEY,{expiresIn:"24h"})
+    const token= await jwt.sign({_id},process.env.JWTSECRETKEY,{expiresIn:"24h"})
 return token;
 }
 const SignUp=async(req,res)=>{
