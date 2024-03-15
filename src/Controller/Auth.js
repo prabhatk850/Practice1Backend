@@ -5,7 +5,7 @@ const {isAdmin}=require('../MiddleWare/middleware')
 const authschema = require("../Database/authschema");
 
 tokenGenrate=async(_id)=>{
-    const token=await jwt.sign({_id,isAdmin:isAdmin},process.env.JWTSECRETKEY,{expiresIn:"24h"})
+    const token=await jwt.sign({_id},process.env.JWTSECRETKEY,{expiresIn:"24h"})
 return token;
 }
 const SignUp=async(req,res)=>{
