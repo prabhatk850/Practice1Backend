@@ -24,7 +24,15 @@ const authTokenCheck = async(req,res,next)=> {
         }
     
     })
- 
-
 }
-module.exports = {authTokenCheck}
+
+const isAdmin=(req,res,next)=>{
+    if(req.user.isAdmin===true){
+        next()
+    }
+    else{
+        res.status(401).send("Access Denied")
+    }
+}
+
+module.exports = {authTokenCheck,isAdmin}

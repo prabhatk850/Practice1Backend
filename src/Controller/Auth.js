@@ -1,9 +1,11 @@
 const ApplicationModel=require('../Database/authschema')
 const jwt =require("jsonwebtoken");
 require("dotenv").config();
+const {isAdmin}=require('../MiddleWare/middleware')
+const authschema = require("../Database/authschema");
 
 tokenGenrate=async(_id)=>{
-    const token=await jwt.sign({_id},process.env.JWTSECRETKEY,{expiresIn:"24h"})
+    const token=await jwt.sign({_id,isAdmin:isAdmin},process.env.JWTSECRETKEY,{expiresIn:"24h"})
 return token;
 }
 const SignUp=async(req,res)=>{
@@ -37,11 +39,16 @@ const SignIn= async (req,res)=>{
           email: req.body.email
         });
         if(!emailcheck){
-          res.status(404).send("User not found")
+          return res.status(404).send("User not found")
         }
        if(emailcheck && req.body.password == emailcheck.password){
               token = await tokenGenrate(emailcheck._id).then((result)=>{
-                  res.send(result)
+                    let isAdmin=false;
+                    authschema.findOne({email:req.body.email}).then((rest)=>{    
+                    isAdmin=rest.isAdmin
+                    token = result
+                    res.status(200).json({token,isAdmin})
+                    })  
               })
               .catch((err)=>{
                   console.log("err",err)
@@ -63,7 +70,16 @@ const viewApplication=(req,res)=>{
     })
 } 
 
-const submitApplication=(req,res)=>{
+const viewByAdmin=(req,res)=>{
+    ApplicationModel.find().then((result)=>{
+        console.log("first",result)
+        res.status(200).json(result)
+    }).catch((error)=>{
+        res.status(400).json({message:"Error in fetching data",error})
+    })    
+}
+
+const submitApplication= (req,res)=>{
     const {phoneno,dob,experience,city,state}=req.body;
     if(!phoneno||!dob||!experience||!state||!city){
         res.status(400).json({message:"All fields are mandatory"})
@@ -82,5 +98,7 @@ const submitApplication=(req,res)=>{
 
 
 
-module.exports={SignUp,SignIn,submitApplication,viewApplication}
+
+
+module.exports={SignUp,SignIn,submitApplication,viewApplication,viewByAdmin}
 
