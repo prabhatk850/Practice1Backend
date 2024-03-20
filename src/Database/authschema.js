@@ -52,12 +52,12 @@ const applicationSchema=new mongoose.Schema({
     degree:{
         type:String
     },
-    resume:{
+    resume:[{
         type:String
-    },
-    coverletter:{
+    }],
+    coverletter:[{
         type:String
-    },
+    }],
     bestTimeToReach:{
         type:String
     },
