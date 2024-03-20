@@ -22,6 +22,9 @@ const applicationSchema=new mongoose.Schema({
     skills:[{
         type:String
     }],
+    secondarySkills:[{
+        type:String
+    }],
     experience:{
         type:String
     },
@@ -46,6 +49,22 @@ const applicationSchema=new mongoose.Schema({
         type:Boolean,
         default:false
     },
+    degree:{
+        type:String
+    },
+    resume:{
+        type:String
+    },
+    coverletter:{
+        type:String
+    },
+    bestTimeToReach:{
+        type:String
+    },
+    additionalExperience:{
+        type:String
+    },
+    
 })
 
 module.exports=mongoose.model('Applications',applicationSchema)
