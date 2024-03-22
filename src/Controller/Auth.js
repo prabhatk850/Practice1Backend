@@ -2,6 +2,7 @@ const ApplicationModel=require('../Database/authschema')
 const jwt =require("jsonwebtoken");
 require("dotenv").config()
 const authschema = require("../Database/authschema");
+const { application } = require('express');
 
 tokenGenrate=async(_id)=>{
     const token= await jwt.sign({_id},process.env.JWTSECRETKEY,{expiresIn:"24h"})
@@ -79,12 +80,15 @@ const viewByAdmin=(req,res)=>{
 }
 
 const submitApplication= (req,res)=>{
-    const {phoneno,dob,experience,city,state}=req.body;
+    const applicationDetails = JSON.parse(req.body.applicationDetails);
+    const {phoneno,dob,experience,city,state}=applicationDetails;
     if(!phoneno||!dob||!experience||!state||!city){
         res.status(400).json({message:"All fields are mandatory"})
     }
     else{
         const data=req.body
+        data.resume=req.resumelink
+        data.coverletter=req.coverlink
 
         ApplicationModel.findOneAndUpdate(req.user._id,data).then((result)=>{
              console.log("sumitted",result)
