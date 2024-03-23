@@ -21,9 +21,9 @@ const upload = multer({ storage: storage })
 router.route("/signup").post(SignUp)
 router.route("/login").post(SignIn)
 // router.route("/application").post(authTokenCheck, submitApplication)
+router.route('/application').post(upload.fields([{name:"resume"},{name:"coverletter"}]),authTokenCheck, uploadFile, submitApplication)
 router.route('/viewapplication').get(authTokenCheck, viewApplication)
 router.route('/viewbyadmin').get(authTokenCheck,isAdmin, viewByAdmin)
-router.route('/application').post(upload.fields([{name:"resume"},{name:"coverletter"}]),authTokenCheck, uploadFile, submitApplication)
 
 
 module.exports=router; 
