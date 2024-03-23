@@ -2,7 +2,7 @@ const ApplicationModel=require('../Database/authschema')
 const jwt =require("jsonwebtoken");
 require("dotenv").config()
 const authschema = require("../Database/authschema");
-const { application } = require('express');
+// const { application } = require('express');
 
 tokenGenrate=async(_id)=>{
     const token= await jwt.sign({_id},process.env.JWTSECRETKEY,{expiresIn:"24h"})
