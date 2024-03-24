@@ -90,6 +90,8 @@ const submitApplication= (req,res)=>{
         data.resume=req.resumelink
         data.coverletter=req.coverlink
 
+        console.log("data",data)
+
         ApplicationModel.findOneAndUpdate(req.user._id,data).then((result)=>{
              console.log("sumitted",result)
             res.status(200).json({message:"Application submitted successfully"})
