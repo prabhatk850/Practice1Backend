@@ -86,7 +86,7 @@ const submitApplication= (req,res)=>{
         res.status(400).json({message:"All fields are mandatory"})
     }
     else{
-        const data=req.body
+        const data=applicationDetails
         data.resume=req.resumelink
         data.coverletter=req.coverlink
 
