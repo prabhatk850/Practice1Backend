@@ -64,6 +64,10 @@ const applicationSchema=new mongoose.Schema({
     additionalExperience:{
         type:String
     },
+    jobprofile:{
+        type:String
+    },
+    
     
 })
 
