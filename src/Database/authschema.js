@@ -73,6 +73,12 @@ const applicationSchema=new mongoose.Schema({
     noticeperiod:{
         type:String
     },
+    currentSalary:{
+        type:String
+    },
+    expectedSalary:{
+        type:String
+    },
     
     
 })
