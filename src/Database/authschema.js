@@ -67,6 +67,12 @@ const applicationSchema=new mongoose.Schema({
     jobprofile:{
         type:String
     },
+    releventexperience:{
+        type:String
+    },
+    noticeperiod:{
+        type:String
+    },
     
     
 })
