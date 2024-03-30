@@ -55,7 +55,7 @@ const SignIn= async (req,res)=>{
               })
           }
           else{
-              res.send("Invalid password")
+              res.status(401).send("Invalid password")
           }
   
 }
