@@ -79,6 +79,9 @@ const applicationSchema=new mongoose.Schema({
     expectedSalary:{
         type:String
     },
+    noticenegotiable:{
+        type:Boolean
+    },
     
     
 })
