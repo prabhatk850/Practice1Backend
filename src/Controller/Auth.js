@@ -81,9 +81,9 @@ const viewByAdmin=(req,res)=>{
 
 const submitApplication= (req,res)=>{
     const applicationDetails = JSON.parse(req.body.applicationDetails);
-    const {phoneno,dob,experience,city,state}=applicationDetails;
-    if(!phoneno||!dob||!experience||!state||!city){
-        res.status(400).json({message:"All fields are mandatory"})
+    const {phoneno}=applicationDetails;
+    if(!phoneno){
+        res.status(400).json({message:"phoneno. is mandatory"})
     }
     else{
         const data=applicationDetails
