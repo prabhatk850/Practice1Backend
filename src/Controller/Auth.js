@@ -97,7 +97,8 @@ const submitApplication= (req,res)=>{
             res.status(200).json({message:"Application submitted successfully"})
 
         }).catch((err)=>{
-            res.status(400).json({message:"Error in submitting application",err})
+            console.log("erro",err)
+            res.status(401).json({message:"Error in submitting application",err})
         })}
 }
 
